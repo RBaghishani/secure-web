@@ -3,21 +3,35 @@ import StrengthMeter from "./StrengthMeter";
 import {useStrengthChecker} from "../hooks/useStrengthChecker";
 // import bcrypt from 'bcrypt';
 
+import bcrypt from "bcryptjs-react";
+
 const RegistrationForm = () => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const {isStrong} = useStrengthChecker(password);
 
+  const generateHashUsingUsernameAsSalt = (username, password) => {
+    //TODO : check this link please!
+    //https://security.stackexchange.com/questions/158963/bcrypt-password-hashing-with-user-email-as-salt
+    let encoded = bcrypt.encodeBase64(username, username.length);
+    const hash = encoded.length >= 22 ? bcrypt.hashSync(password, "$2a$12$" + encoded) : bcrypt.hashSync(password, "$2a$12$" + encoded + 'a'.repeat(22 - encoded.length));
+    return hash;
+  }
+
+  const generateWithRandomSalt = (password) => {
+    let hash = bcrypt.hashSync(password, 10);
+    return hash;
+  }
+
+
   const onSubmit = async (e) => {
+    e.preventDefault();
+    e.persist();
     try {
-      /*bcrypt.hash(password, username, function (err, hash) {
-        // Store hash in database here
-        console.log(hash);
 
+      console.log(generateHashUsingUsernameAsSalt(username, password));
 
-      });*/
-      e.preventDefault();
-      e.persist();
+      console.log(generateWithRandomSalt(password));
       //axios call
     } catch (error) {
       throw error;
