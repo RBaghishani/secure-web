@@ -3,13 +3,16 @@ import UpdatePatient from "./UpdatePatient";
 import {deletePatient, fetchPatients} from "../api/PatientAPI";
 
 function PatientList() {
-  const [patients, setPatients] = useState(fetchPatients());
+  const [patients, setPatients] = useState([]);
   const [patientToUpdate, setPatientToUpdate] = useState(null);
 
   useEffect(() => {
-    fetchPatients();
+    getPatients();
   }, []);
 
+  const getPatients = async ()=>{
+    setPatients(await fetchPatients());
+  }
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this patient?")) {
       return;
@@ -24,7 +27,14 @@ function PatientList() {
 
   return (
     <div>
-      <h2>Patient List</h2>
+      <h2>
+        Patient List
+        <button
+        onClick={()=>{getPatients()}}
+        >
+          Reload
+        </button>
+      </h2>
       <table>
         <thead>
         <tr>
