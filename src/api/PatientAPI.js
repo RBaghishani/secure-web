@@ -45,3 +45,26 @@ export const deletePatient = async (id) => {
     console.error(err);
   }
 };
+
+export const findPatients = async (firstname, lastname) => {
+  try {
+    firstname = firstname.trim();
+    lastname = lastname.trim();
+    if (firstname === "") {
+      firstname = null;
+    }
+    if (lastname === "") {
+      lastname = null;
+    }
+    const response = await api.get(`/api/v1/patient/search`, {
+      params: {
+        firstname, lastname
+      },
+    });
+
+    const patients = response.data;
+    return patients;
+  } catch (err) {
+    console.error(err);
+  }
+}
