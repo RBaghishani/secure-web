@@ -71,6 +71,15 @@ function NewPatient() {
         <Col lg="6">
           <Form onSubmit={handleSubmit}>
             <h2 className="mb-4">Create New Patient</h2>
+            <Form.Group className="mb-3">
+              <Form.Label>Avatar:</Form.Label>
+              <Form.Control
+                type="file"
+                name="avatar"
+                value={patient.avatar}
+                onChange={handleChange} />
+            </Form.Group>
+            
             <PatientForm
               patient={patient}
               handleChange={handleChange}
