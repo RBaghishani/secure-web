@@ -5,6 +5,7 @@ import PatientForm from "./PatientForm";
 import { useStrengthChecker } from '../hooks/useStrengthChecker';
 
 function NewPatient() {
+  const [avatar, setAvatar] = useState(null);
   const [patient, setPatient] = useState({
     firstname: "",
     lastname: "",
@@ -20,11 +21,26 @@ function NewPatient() {
   const { strength } = useStrengthChecker(patient.password)
 
   const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    setPatient((prevState) => ({
-      ...prevState,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    const { name, value, type, checked, files } = event.target;
+    if (type === "checkbox") {
+      setPatient((prevState) => ({
+        ...prevState,
+        [name]: checked,
+      }));
+    } else if (type === "file") {
+      console.log(files)
+      /*setPatient((prevState) => ({
+        ...prevState,
+        [name]: files[0],
+      }));*/
+      setAvatar(files[0]);
+    } else {
+      setPatient((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+
   };
 
   const handleSubmit = async (event) => {
@@ -40,8 +56,9 @@ function NewPatient() {
     }
     
     try {
-      await createPatient(patient);
+      const createdPatient = await createPatient({...patient, avatar});
       alert("Patient created successfully!");
+      // history.push(`/patients/${createdPatient.id}`);
     } catch (err) {
       console.error(err);
       alert("Error occurred while creating patient");

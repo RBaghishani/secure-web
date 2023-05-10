@@ -8,6 +8,15 @@ function PatientForm({ handleChange, patient, requiredPassword = false }) {
   return (
     <>
       <Form.Group className="mb-3">
+        <Form.Label>Avatar:</Form.Label>
+        <Form.Control
+          type="file"
+          name="avatar"
+          value={patient.avatar}
+          onChange={handleChange} />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
         <Form.Label> First Name: </Form.Label>
         <Form.Control
           type="text"

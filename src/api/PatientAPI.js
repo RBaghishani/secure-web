@@ -17,9 +17,12 @@ export const fetchPatients = async () => {
 
 export const createPatient = async (patient) => {
   try {
-    const response = await api.post("/api/v1/patient", patient);
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(patient)) {
+      formData.append(key, value);
+    }
+    const response = await api.post("/api/v1/patient", formData, {headers: {'content-type': 'multipart/form-data'}});
     const createdPatient = response.data;
-    console.log(createdPatient);
     return createdPatient;
   } catch (err) {
     console.error(err);
