@@ -15,11 +15,29 @@ export const fetchPatients = async () => {
   }
 };
 
+export const fetchPatient = async (id) => {
+  try {
+    const response = await api.get(`/api/v1/patient/${id}`);
+    const patient = response.data;
+
+    if (patient.avatar) {
+      patient.avatar = `data:image/png;base64,${patient.avatar}`;
+    }
+
+    return patient;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export const createPatient = async (patient) => {
   try {
-    const response = await api.post("/api/v1/patient", patient);
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(patient)) {
+      formData.append(key, value);
+    }
+    const response = await api.post("/api/v1/patient", formData, {headers: {'content-type': 'multipart/form-data'}});
     const createdPatient = response.data;
-    console.log(createdPatient);
     return createdPatient;
   } catch (err) {
     console.error(err);

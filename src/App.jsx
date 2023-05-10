@@ -4,6 +4,7 @@ import { ThemeProvider, Navbar, Container, Nav } from "react-bootstrap";
 import NewPatient from "./components/NewPatient";
 import PatientList from "./components/PatientList";
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
+import PatientInformation from './components/PatientInformation';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Routes>
             <Route index element={<NewPatient />} />
             <Route path='/list' element={<PatientList />} />
+            <Route path='/patient/:id' element={<PatientInformation />} />
           </Routes>
         </main>
       </ThemeProvider>

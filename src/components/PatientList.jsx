@@ -7,6 +7,7 @@ import {
   updatePatient,
 } from "../api/PatientAPI";
 import { Container, Form, Row, Col, Button, Table } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 function PatientList() {
   const [patients, setPatients] = useState([]);
@@ -128,13 +129,13 @@ function PatientList() {
                     >
                       Delete
                     </Button>
-                    <Button
-                      onClick={() => setPatientToUpdate(patient)}
-                      className="ms-2"
-                      size="sm"
+                    
+                    <Link
+                      to={`/patient/${patient.id}`}
+                      className="btn btn-primary btn-sm ms-2"
                     >
                       Edit
-                    </Button>
+                    </Link>
                   </td>
                 </tr>
                 <UpdatePatient

@@ -18,6 +18,12 @@ export const useStrengthChecker = (password) => {
     return strength;
   }, [password]);
 
+  if (password && password.length < 8) {
+    return {
+      strength: 1,
+      label: "too short",
+    };
+  }
   switch (pwdCheck) {
     case 0:
       return {
