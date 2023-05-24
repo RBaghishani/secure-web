@@ -46,6 +46,7 @@ export const UserProfile = () => {
                                 onChange={(ev) => setGender(ev.target.value)}
                                 required
                             >
+                                <option value="" disabled>Please select</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="non-binary">Non-binary</option>

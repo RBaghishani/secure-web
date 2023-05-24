@@ -75,6 +75,7 @@ export const CreatePatient = () => {
                                 <Form.Label>Firstname</Form.Label>
                                 <Form.Control
                                     type="text"
+                                    name="firstname"
                                     value={firstname}
                                     onChange={(ev) => setFirstname(ev.target.value)}
                                     required
@@ -84,6 +85,7 @@ export const CreatePatient = () => {
                                 <Form.Label>Lastname</Form.Label>
                                 <Form.Control
                                     type="text"
+                                    name="lastname"
                                     value={lastname}
                                     onChange={(ev) => setLastname(ev.target.value)}
                                     required
@@ -92,6 +94,7 @@ export const CreatePatient = () => {
                             <Form.Group className="mb-3">
                                 <Form.Label>Gender</Form.Label>
                                 <Form.Select value={gender} onChange={(ev) => setGender(ev.target.value)} required>
+                                    <option value="" disabled>Please select</option>
                                     <option value="MALE">Male</option>
                                     <option value="FEMALE">Female</option>
                                     <option value="NON_BINARY">Non-binary</option>
@@ -101,6 +104,7 @@ export const CreatePatient = () => {
                                 <Form.Label>Phone</Form.Label>
                                 <Form.Control
                                     type="text"
+                                    name="phone"
                                     value={phoneNumber}
                                     onChange={(ev) => setPhoneNumber(ev.target.value)}
                                     required
@@ -110,6 +114,7 @@ export const CreatePatient = () => {
                                 <Form.Label>Address</Form.Label>
                                 <Form.Control
                                     type="text"
+                                    name="address"
                                     value={address}
                                     onChange={(ev) => setAddress(ev.target.value)}
                                     required
@@ -119,6 +124,7 @@ export const CreatePatient = () => {
                                 <Form.Label>Birth Date</Form.Label>
                                 <Form.Control
                                     type="date"
+                                    name="birth-date"
                                     value={dob}
                                     onChange={(ev) => setDob(ev.target.value)}
                                     required
@@ -128,6 +134,7 @@ export const CreatePatient = () => {
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control
                                     type="email"
+                                    name="email"
                                     value={email}
                                     onChange={(ev) => setEmail(ev.target.value)}
                                     required

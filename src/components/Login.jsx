@@ -8,8 +8,8 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [code, setCode] = useState("");
-    const { setAuth } = useAuth();
     const [message, setMessage] = useState(null);
+    const { setAuth } = useAuth();
     const navigate = useNavigate();
 
     const onSubmit = async (ev) => {
@@ -34,7 +34,8 @@ const Login = () => {
                     <Form.Group className="mb-3">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="email"
+                            name="email"
                             value={email}
                             onChange={(ev) => setEmail(ev.target.value)}
                             autoFocus
