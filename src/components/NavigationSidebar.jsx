@@ -1,13 +1,13 @@
-import { LayoutDashboardIcon, LogOutIcon } from "lucide-react";
+import { LayoutDashboardIcon, LogOutIcon, UserIcon, UserPlusIcon, UsersIcon } from "lucide-react";
 import { Card, Col, Nav, Row } from "react-bootstrap";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { useUser } from "../hooks/useUser";
+import { useAuth } from "../hooks/useAuth";
 
 export const NavigationSidebar = () => {
     const [, setToken] = useLocalStorage("token", null);
     const [, setRefreshToken] = useLocalStorage("refresh-token", null);
-    const user = useUser();
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     const logout = () => {
@@ -25,8 +25,10 @@ export const NavigationSidebar = () => {
                         roundedCircle
                         className="w-100"
                     /> */}
-                    <div className="ratio ratio-1x1 bg-light border rounded-circle">
-                        <span className="d-flex align-items-center justify-content-center">JD</span>
+                    <div className="ratio ratio-1x1 bg-light bg-gradient border rounded-circle">
+                        <span className="d-flex align-items-center justify-content-center text-dark">
+                            <UserIcon size={26} />
+                        </span>
                     </div>
                 </Col>
                 <Col>
@@ -46,13 +48,13 @@ export const NavigationSidebar = () => {
                 </Nav.Item>
                 <Nav.Item>
                     <NavLink to="/create-patient" className="nav-link d-flex align-items-center bg-gradient">
-                        <LayoutDashboardIcon size={16} className="me-2" />
+                        <UserPlusIcon size={16} className="me-2" />
                         Create Patient
                     </NavLink>
                 </Nav.Item>
                 <Nav.Item>
                     <NavLink to="/patient-list" className="nav-link d-flex align-items-center bg-gradient">
-                        <LayoutDashboardIcon size={16} className="me-2" />
+                        <UsersIcon size={16} className="me-2" />
                         Patients List
                     </NavLink>
                 </Nav.Item>

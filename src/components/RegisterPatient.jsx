@@ -39,9 +39,9 @@ const RegisterPatient = () => {
             });
 
             setAuth(access_token, refresh_token);
-            navigate("/");
+            navigate("/2fa-verify");
         } catch (error) {
-            setMessage({ type: "danger", text: error.response.data.message });
+            setMessage({ type: "danger", text: error.response.data.message || "Error" });
             console.error(error);
         } finally {
             setLoading(false);
@@ -59,6 +59,7 @@ const RegisterPatient = () => {
                             <Form.Label>Firstname</Form.Label>
                             <Form.Control
                                 type="text"
+                                name="firstname"
                                 value={firstname}
                                 onChange={(ev) => setFirstname(ev.target.value)}
                                 required
@@ -68,6 +69,7 @@ const RegisterPatient = () => {
                             <Form.Label>Lastname</Form.Label>
                             <Form.Control
                                 type="text"
+                                name="lastname"
                                 value={lastname}
                                 onChange={(ev) => setLastname(ev.target.value)}
                                 required
@@ -76,6 +78,7 @@ const RegisterPatient = () => {
                         <Form.Group className="mb-3">
                             <Form.Label>Gender</Form.Label>
                             <Form.Select value={gender} onChange={(ev) => setGender(ev.target.value)} required>
+                                <option value="" disabled>Please select</option>
                                 <option value="MALE">Male</option>
                                 <option value="FEMALE">Female</option>
                                 <option value="NON_BINARY">Non-binary</option>
@@ -85,6 +88,7 @@ const RegisterPatient = () => {
                             <Form.Label>Phone</Form.Label>
                             <Form.Control
                                 type="text"
+                                name="phone"
                                 value={phoneNumber}
                                 onChange={(ev) => setPhoneNumber(ev.target.value)}
                                 required
@@ -94,6 +98,7 @@ const RegisterPatient = () => {
                             <Form.Label>Address</Form.Label>
                             <Form.Control
                                 type="text"
+                                name="address"
                                 value={address}
                                 onChange={(ev) => setAddress(ev.target.value)}
                                 required
@@ -101,12 +106,19 @@ const RegisterPatient = () => {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Birth Date</Form.Label>
-                            <Form.Control type="date" value={dob} onChange={(ev) => setDob(ev.target.value)} required />
+                            <Form.Control
+                                type="date"
+                                name="birth-date"
+                                value={dob}
+                                onChange={(ev) => setDob(ev.target.value)}
+                                required
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
                                 type="email"
+                                name="email"
                                 value={email}
                                 onChange={(ev) => setEmail(ev.target.value)}
                                 required
@@ -115,7 +127,7 @@ const RegisterPatient = () => {
                         <Form.Group className="mb-3">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
-                                type="text"
+                                type="password"
                                 value={password}
                                 onChange={(ev) => setPassword(ev.target.value)}
                                 required

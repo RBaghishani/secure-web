@@ -2,12 +2,12 @@ import { HeartPulseIcon } from "lucide-react";
 import { Col, Container, Navbar, Row } from "react-bootstrap";
 import { Navigate, Outlet } from "react-router-dom";
 import { NavigationSidebar } from "../components/NavigationSidebar";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useAuth } from "../hooks/useAuth";
 
 const Dashboard = () => {
-    const [token] = useLocalStorage("token", null);
+    const { user } = useAuth();
 
-    if (!token) {
+    if (!user) {
         return <Navigate to="/login" />;
     }
 
