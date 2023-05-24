@@ -1,0 +1,35 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+/* SCSS HEX */
+// $picton-blue: #00a9ddff;
+// $brandeis-blue: #006bf8ff;
+// $orange-web: #ffb010ff;
+// $bittersweet: #fe7658ff;
+// $platinum: #d9dde1ff;
+// $white: #fefefeff;
+// $oxford-blue: #11172eff;
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Then add additional custom code here
+.animation-heartbeat {
+    animation       : beat 1s infinite alternate;
+    transform-origin: center;
+}
+
+/* Heart beat animation */
+@keyframes beat {
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1.1);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
