@@ -1,19 +1,19 @@
 import { LayoutDashboardIcon, LogOutIcon, UserIcon, UserPlusIcon, UsersIcon } from "lucide-react";
 import { Card, Col, Nav, Row } from "react-bootstrap";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useAuth } from "../hooks/useAuth";
 
 export const NavigationSidebar = () => {
-    const [, setToken] = useLocalStorage("token", null);
-    const [, setRefreshToken] = useLocalStorage("refresh-token", null);
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const navigate = useNavigate();
 
-    const logout = () => {
-        setToken(null);
-        setRefreshToken(null);
-        navigate("/login");
+    const onLogout = async () => {
+        try {
+            await logout();
+            navigate("/login");
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -64,7 +64,7 @@ export const NavigationSidebar = () => {
                 <Nav.Item>
                     <Nav.Link
                         as={"button"}
-                        onClick={logout}
+                        onClick={onLogout}
                         className="d-flex align-items-center bg-gradient link-danger w-100"
                     >
                         <LogOutIcon size={16} className="me-2" />
