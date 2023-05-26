@@ -6,6 +6,7 @@ export const createPatient = async (patient) => {
             "Content-Type": "multipart/form-data",
         },
     });
+
     return data;
 };
 
@@ -22,6 +23,18 @@ export const searchPatient = async (firstname, lastname) => {
             lastname: lastname.trim() === "" ? null : lastname.trim(),
         },
     });
+
+    return data;
+};
+
+export const updatePatient = async (id, patient) => {
+    const { data } = await client.patch(`/patient/${id}`, patient);
+
+    return data;
+};
+
+export const getPatient = async (id) => {
+    const { data } = await client.get(`/patient/${id}`);
 
     return data;
 };
