@@ -36,6 +36,7 @@ const RegisterPatient = () => {
                 phoneNumber,
                 address,
                 dob,
+                role: "PATIENT",
             });
 
             setAuth(access_token, refresh_token);
